@@ -2,7 +2,14 @@ import { motion } from "framer-motion";
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Button } from "@/components/ui/button";
-import { ExternalLink, Github, Zap, Car, Droplets, Globe } from "lucide-react";
+import {
+  ExternalLink,
+  Github,
+  Zap,
+  Globe,
+  Clock,
+  CheckCircle,
+} from "lucide-react";
 import { portfolioData } from "@/lib/portfolio-data";
 
 const Projects = () => {
@@ -15,6 +22,35 @@ const Projects = () => {
     const IconComponent =
       projectIcons[category as keyof typeof projectIcons] || Zap;
     return IconComponent;
+  };
+
+  const getStatusBadge = (status: string) => {
+    switch (status) {
+      case "live":
+        return {
+          icon: CheckCircle,
+          text: "Live",
+          className: "bg-green-100 text-green-800",
+        };
+      case "completed":
+        return {
+          icon: CheckCircle,
+          text: "Completed",
+          className: "bg-blue-100 text-blue-800",
+        };
+      case "in-progress":
+        return {
+          icon: Clock,
+          text: "In Progress",
+          className: "bg-yellow-100 text-yellow-800",
+        };
+      default:
+        return {
+          icon: Clock,
+          text: "Coming Soon",
+          className: "bg-gray-100 text-gray-800",
+        };
+    }
   };
 
   return (
@@ -40,6 +76,8 @@ const Projects = () => {
         <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
           {portfolioData.projects.map((project, index) => {
             const IconComponent = getProjectIcon(project.category);
+            const statusInfo = getStatusBadge(project.status);
+            const StatusIcon = statusInfo.icon;
 
             return (
               <motion.div
@@ -59,16 +97,25 @@ const Projects = () => {
                           size={24}
                         />
                       </div>
-                      <Badge
-                        variant="secondary"
-                        className={`${
-                          project.category === "IoT"
-                            ? "bg-blue-100 text-blue-800"
-                            : "bg-green-100 text-green-800"
-                        }`}
-                      >
-                        {project.category}
-                      </Badge>
+                      <div className="flex flex-col gap-2 items-end">
+                        <Badge
+                          variant="secondary"
+                          className={`${
+                            project.category === "IoT"
+                              ? "bg-blue-100 text-blue-800"
+                              : "bg-green-100 text-green-800"
+                          }`}
+                        >
+                          {project.category}
+                        </Badge>
+                        <Badge
+                          variant="outline"
+                          className={statusInfo.className}
+                        >
+                          <StatusIcon size={12} className="mr-1" />
+                          {statusInfo.text}
+                        </Badge>
+                      </div>
                     </div>
                     <CardTitle className="text-xl leading-tight group-hover:text-portfolio-600 transition-colors">
                       {project.title}
@@ -76,9 +123,14 @@ const Projects = () => {
                   </CardHeader>
 
                   <CardContent className="pt-0">
-                    <p className="text-gray-600 leading-relaxed mb-6">
-                      {project.description}
-                    </p>
+                    <div className="mb-4">
+                      <p className="text-sm text-gray-500 mb-2">
+                        {project.period}
+                      </p>
+                      <p className="text-gray-600 leading-relaxed">
+                        {project.description}
+                      </p>
+                    </div>
 
                     <div className="space-y-4">
                       {/* Technologies */}
@@ -101,30 +153,63 @@ const Projects = () => {
 
                       {/* Action Buttons */}
                       <div className="flex gap-2 pt-2">
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1 text-portfolio-600 border-portfolio-300 hover:bg-portfolio-50"
-                          onClick={() => {
-                            // In a real project, this would link to the project demo
-                            console.log(`Viewing project: ${project.title}`);
-                          }}
-                        >
-                          <ExternalLink size={14} className="mr-1" />
-                          Demo
-                        </Button>
-                        <Button
-                          variant="outline"
-                          size="sm"
-                          className="flex-1"
-                          onClick={() => {
-                            // In a real project, this would link to the GitHub repo
-                            console.log(`GitHub repo for: ${project.title}`);
-                          }}
-                        >
-                          <Github size={14} className="mr-1" />
-                          Code
-                        </Button>
+                        {project.links.live ? (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 text-green-600 border-green-300 hover:bg-green-50"
+                            onClick={() => {
+                              if (project.links.live !== "#") {
+                                window.open(project.links.live, "_blank");
+                              } else {
+                                console.log(`Live demo for: ${project.title}`);
+                              }
+                            }}
+                          >
+                            <ExternalLink size={14} className="mr-1" />
+                            Live Demo
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 text-gray-400 border-gray-300 cursor-not-allowed"
+                            disabled
+                          >
+                            <ExternalLink size={14} className="mr-1" />
+                            Coming Soon
+                          </Button>
+                        )}
+
+                        {project.links.github ? (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 text-portfolio-600 border-portfolio-300 hover:bg-portfolio-50"
+                            onClick={() => {
+                              if (project.links.github !== "#") {
+                                window.open(project.links.github, "_blank");
+                              } else {
+                                console.log(
+                                  `GitHub repo for: ${project.title}`,
+                                );
+                              }
+                            }}
+                          >
+                            <Github size={14} className="mr-1" />
+                            GitHub
+                          </Button>
+                        ) : (
+                          <Button
+                            variant="outline"
+                            size="sm"
+                            className="flex-1 text-gray-400 border-gray-300 cursor-not-allowed"
+                            disabled
+                          >
+                            <Github size={14} className="mr-1" />
+                            Private
+                          </Button>
+                        )}
                       </div>
                     </div>
                   </CardContent>
@@ -140,7 +225,7 @@ const Projects = () => {
           whileInView={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.6, delay: 0.5 }}
           viewport={{ once: true }}
-          className="mt-16 grid md:grid-cols-2 gap-8"
+          className="mt-16 grid md:grid-cols-3 gap-8"
         >
           <Card className="bg-gradient-to-r from-blue-500 to-blue-600 text-white">
             <CardContent className="p-6 text-center">
@@ -151,7 +236,7 @@ const Projects = () => {
                 automation
               </p>
               <div className="mt-4 text-2xl font-bold">4</div>
-              <div className="text-xs opacity-80">Active Projects</div>
+              <div className="text-xs opacity-80">IoT Solutions</div>
             </CardContent>
           </Card>
 
@@ -163,7 +248,19 @@ const Projects = () => {
                 Responsive websites and full-stack applications
               </p>
               <div className="mt-4 text-2xl font-bold">1</div>
-              <div className="text-xs opacity-80">Featured Project</div>
+              <div className="text-xs opacity-80">Live Website</div>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-gradient-to-r from-purple-500 to-purple-600 text-white">
+            <CardContent className="p-6 text-center">
+              <Clock size={32} className="mx-auto mb-4" />
+              <h3 className="text-lg font-semibold mb-2">In Development</h3>
+              <p className="text-sm opacity-90">
+                Ongoing and upcoming innovative projects
+              </p>
+              <div className="mt-4 text-2xl font-bold">1</div>
+              <div className="text-xs opacity-80">Active Project</div>
             </CardContent>
           </Card>
         </motion.div>
@@ -189,7 +286,7 @@ const Projects = () => {
             }}
             className="bg-portfolio-600 hover:bg-portfolio-700 text-white px-8 py-3 rounded-full"
           >
-            Let's Discuss
+            Let's Discuss Projects
           </Button>
         </motion.div>
       </div>

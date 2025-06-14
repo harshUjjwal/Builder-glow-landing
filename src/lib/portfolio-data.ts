@@ -7,6 +7,7 @@ export const portfolioData = {
     phone: "+91 8588830775",
     location: "Vaishali, Ghaziabad, Uttar Pradesh",
     github: "https://github.com/harshujjwal",
+    linkedin: "https://www.linkedin.com/in/harsh-ujjwal-94a26b281",
     summary:
       "Solution-driven software developer proficient in full-stack web development, IoT systems, and AI-based automation. Proven ability to lead cross-functional teams and deliver impactful, real-world solutions.",
   },
@@ -47,80 +48,105 @@ export const portfolioData = {
     {
       title: "Web Developer Intern",
       company: "Inclusion Software Solutions, Mohali",
-      period: "May–Aug 2025",
+      period: "May 2025 – Aug 2025",
       type: "Paid",
+      salary: "₹5000/month",
       description:
-        "Built responsive, user-friendly websites; worked on debugging, optimization, and live projects.",
+        "Worked on live projects, contributed to frontend/backend tasks, optimized performance.",
+      status: "upcoming",
     },
     {
       title: "Software Development Intern",
       company: "Inclusion Software Solutions, Mohali",
-      period: "May–Aug 2024",
+      period: "May 2024 – Aug 2024",
       type: "Unpaid",
-      description:
-        "Created dynamic React.js apps; improved website functionality by 30%.",
+      description: "Developed dynamic React-based apps, improved UI/UX by 30%.",
+      status: "completed",
     },
   ],
 
   projects: [
     {
-      title:
-        "Smart Traffic Innovation with Emergency Vehicle Prioritisation (SIH)",
-      description:
-        "AI and sensor-based traffic signal control for emergency vehicle prioritization.",
-      technologies: ["AI", "IoT", "Sensors", "Python"],
-      category: "IoT",
-    },
-    {
-      title: "Fog Density-Based Safe Driving System",
-      description:
-        "IoT + AI voice assistant to suggest safe speeds in fog using DHT11 & ultrasonic sensors.",
-      technologies: ["IoT", "AI", "DHT11", "Python", "Voice Assistant"],
-      category: "IoT",
-    },
-    {
-      title: "Green Corridor Traffic Light System",
-      description:
-        "Real-time optimization of traffic light timing to create green corridors.",
-      technologies: ["IoT", "Real-time Processing", "Python"],
-      category: "IoT",
+      title: "Real Estate Website",
+      description: "Responsive site for property listings.",
+      period: "May 2024 – Aug 2024",
+      technologies: ["React.js", "CSS3", "Responsive Design"],
+      category: "Web Development",
+      status: "live",
+      links: {
+        live: "#", // Replace with actual demo link
+        github: null,
+      },
     },
     {
       title: "Automatic Liquid Dispenser",
-      description:
-        "IR sensor–based liquid dispenser with notification display.",
-      technologies: ["Arduino", "IR Sensors", "C++"],
+      description: "IR sensor-based IoT liquid dispensing system.",
+      period: "Aug 2024 – Nov 2024",
+      technologies: ["Arduino", "IR Sensors", "C++", "IoT"],
       category: "IoT",
+      status: "completed",
+      links: {
+        live: null,
+        github: "#", // Replace with actual GitHub link
+      },
     },
     {
-      title: "Responsive Real Estate Website",
-      description:
-        "Platform for property listings with mobile/tablet optimization using React.js and media queries.",
-      technologies: ["React.js", "CSS3", "Responsive Design"],
-      category: "Web Development",
+      title: "Fog Density-Based Safe Driving System",
+      description: "DHT11 & Ultrasonic-based AI system for road safety in fog.",
+      period: "Jan 2024 – Mar 2024",
+      technologies: ["IoT", "AI", "DHT11", "Python", "Voice Assistant"],
+      category: "IoT",
+      status: "completed",
+      links: {
+        live: null,
+        github: "#", // Replace with actual GitHub link
+      },
+    },
+    {
+      title: "Green Corridor Traffic Light System",
+      description: "AI + IoT based real-time traffic flow management.",
+      period: "Jan 2025 – Present",
+      technologies: ["IoT", "AI", "Real-time Processing", "Python"],
+      category: "IoT",
+      status: "in-progress",
+      links: {
+        live: null,
+        github: null,
+      },
+    },
+    {
+      title: "Emergency Vehicle Smart Traffic Control (SIH)",
+      description: "Emergency vehicle detection and signal optimization.",
+      period: "Sep 2024 – Dec 2024",
+      technologies: ["AI", "IoT", "Sensors", "Python"],
+      category: "IoT",
+      status: "completed",
+      links: {
+        live: null,
+        github: null,
+      },
     },
   ],
 
   certifications: [
     {
-      title: "IoT",
+      title:
+        "Master Data Analytics with Python, SQL, Excel, Stats & Interview Prep",
+      issuer: "30Days Coding (Company)",
+      period: "Dec 2024 – Jan 2025",
+      year: "2024-2025",
+    },
+    {
+      title: "How to Use ChatGPT & Generative AI",
+      issuer: "Udemy - Justin B",
+      period: "May 2024 – Jun 2024",
+      year: "2024",
+    },
+    {
+      title: "Internet of Things (IoT)",
       issuer: "Skill Vertex",
+      period: "May 2023 – Jun 2023",
       year: "2023",
-    },
-    {
-      title: "Master Data Analytics – Python, SQL, Excel, Stats",
-      issuer: "Skill Vertex",
-      year: "2024",
-    },
-    {
-      title: "ChatGPT & Generative AI for Content Creation",
-      issuer: "Udemy",
-      year: "2024",
-    },
-    {
-      title: "30Days Coding Challenge",
-      issuer: "Community",
-      year: "2024",
     },
   ],
 };

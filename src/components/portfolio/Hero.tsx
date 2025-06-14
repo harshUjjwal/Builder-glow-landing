@@ -2,11 +2,14 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { motion } from "framer-motion";
 import { ChevronDown, Github, Mail, MapPin } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import PhotoUpload from "./PhotoUpload";
 import { portfolioData } from "@/lib/portfolio-data";
 
 const Hero = () => {
-  const [profilePhoto, setProfilePhoto] = useState<string>("");
+  const [profilePhoto, setProfilePhoto] = useState<string>(
+    "/assets/profile/profile.jpg",
+  );
 
   const scrollToSection = (sectionId: string) => {
     const element = document.getElementById(sectionId);
@@ -93,17 +96,31 @@ const Hero = () => {
                 Get In Touch
               </Button>
 
-              <Button
-                variant="outline"
-                size="lg"
-                onClick={() =>
-                  window.open(portfolioData.personal.github, "_blank")
-                }
-                className="border-portfolio-300 text-portfolio-600 hover:bg-portfolio-50 px-8 py-3 rounded-full"
-              >
-                <Github size={20} className="mr-2" />
-                View GitHub
-              </Button>
+              <div className="flex gap-2">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() =>
+                    window.open(portfolioData.personal.github, "_blank")
+                  }
+                  className="border-portfolio-300 text-portfolio-600 hover:bg-portfolio-50 px-6 py-3 rounded-full"
+                >
+                  <Github size={20} className="mr-2" />
+                  GitHub
+                </Button>
+
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() =>
+                    window.open(portfolioData.personal.linkedin, "_blank")
+                  }
+                  className="border-blue-300 text-blue-600 hover:bg-blue-50 px-6 py-3 rounded-full"
+                >
+                  <FaLinkedin size={20} className="mr-2" />
+                  LinkedIn
+                </Button>
+              </div>
             </motion.div>
 
             <motion.div
@@ -121,7 +138,7 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Photo Upload */}
+          {/* Right Column - Profile Image */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -130,13 +147,56 @@ const Hero = () => {
           >
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-portfolio-400 to-blue-400 rounded-full blur opacity-20 animate-glow" />
-              <PhotoUpload
-                onPhotoChange={setProfilePhoto}
-                currentPhoto={profilePhoto}
-              />
+              <div className="relative">
+                <img
+                  src="/assets/profile/profile.jpg"
+                  alt="Harsh Ujjwal"
+                  className="rounded-full shadow-lg w-48 h-48 object-cover border-4 border-white"
+                  onError={(e) => {
+                    // Fallback to PhotoUpload component if image doesn't exist
+                    e.currentTarget.style.display = "none";
+                    const parent = e.currentTarget.parentElement;
+                    if (
+                      parent &&
+                      !parent.querySelector(".photo-upload-fallback")
+                    ) {
+                      const uploadDiv = document.createElement("div");
+                      uploadDiv.className = "photo-upload-fallback";
+                      parent.appendChild(uploadDiv);
+                    }
+                  }}
+                />
+                <div className="photo-upload-fallback hidden">
+                  <PhotoUpload
+                    onPhotoChange={setProfilePhoto}
+                    currentPhoto={profilePhoto}
+                  />
+                </div>
+              </div>
             </div>
           </motion.div>
         </div>
+
+        {/* Instructions for manual photo upload */}
+        <motion.div
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ delay: 1.0 }}
+          className="mt-12 text-center"
+        >
+          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
+            <p className="text-sm text-blue-800">
+              <strong>📁 Profile Photo Instructions:</strong> To display your
+              profile photo, manually upload a file named{" "}
+              <code className="bg-blue-100 px-1 rounded">profile.jpg</code> to
+              the
+              <code className="bg-blue-100 px-1 rounded">
+                /public/assets/profile/
+              </code>{" "}
+              folder.
+            </p>
+          </div>
+        </motion.div>
 
         {/* Scroll Indicator */}
         <motion.div

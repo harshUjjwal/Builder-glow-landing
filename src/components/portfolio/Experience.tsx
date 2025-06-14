@@ -1,7 +1,7 @@
 import { motion } from "framer-motion";
 import { Card, CardContent } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
-import { Briefcase, Calendar } from "lucide-react";
+import { Briefcase, Calendar, DollarSign } from "lucide-react";
 import { portfolioData } from "@/lib/portfolio-data";
 
 const Experience = () => {
@@ -41,7 +41,13 @@ const Experience = () => {
                 }`}
               >
                 {/* Timeline Dot */}
-                <div className="absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 bg-portfolio-500 rounded-full border-4 border-white shadow-lg z-10" />
+                <div
+                  className={`absolute left-8 md:left-1/2 md:transform md:-translate-x-1/2 w-4 h-4 rounded-full border-4 border-white shadow-lg z-10 ${
+                    exp.status === "upcoming"
+                      ? "bg-blue-500"
+                      : "bg-portfolio-500"
+                  }`}
+                />
 
                 {/* Content Card */}
                 <div
@@ -51,13 +57,29 @@ const Experience = () => {
                       : "md:ml-auto md:pl-8"
                   }`}
                 >
-                  <Card className="hover:shadow-lg transition-shadow">
+                  <Card
+                    className={`hover:shadow-lg transition-shadow ${
+                      exp.status === "upcoming"
+                        ? "border-blue-200 bg-blue-50"
+                        : ""
+                    }`}
+                  >
                     <CardContent className="p-6">
                       <div className="flex items-start justify-between mb-4">
                         <div className="flex items-center gap-3">
-                          <div className="p-2 bg-portfolio-100 rounded-lg">
+                          <div
+                            className={`p-2 rounded-lg ${
+                              exp.status === "upcoming"
+                                ? "bg-blue-100"
+                                : "bg-portfolio-100"
+                            }`}
+                          >
                             <Briefcase
-                              className="text-portfolio-600"
+                              className={
+                                exp.status === "upcoming"
+                                  ? "text-blue-600"
+                                  : "text-portfolio-600"
+                              }
                               size={20}
                             />
                           </div>
@@ -65,23 +87,39 @@ const Experience = () => {
                             <h3 className="font-semibold text-lg text-gray-900">
                               {exp.title}
                             </h3>
-                            <p className="text-portfolio-600 font-medium">
+                            <p
+                              className={`font-medium ${
+                                exp.status === "upcoming"
+                                  ? "text-blue-600"
+                                  : "text-portfolio-600"
+                              }`}
+                            >
                               {exp.company}
                             </p>
                           </div>
                         </div>
-                        <Badge
-                          variant={
-                            exp.type === "Paid" ? "default" : "secondary"
-                          }
-                          className={
-                            exp.type === "Paid"
-                              ? "bg-green-100 text-green-800"
-                              : ""
-                          }
-                        >
-                          {exp.type}
-                        </Badge>
+                        <div className="flex flex-col gap-2">
+                          <Badge
+                            variant={
+                              exp.type === "Paid" ? "default" : "secondary"
+                            }
+                            className={
+                              exp.type === "Paid"
+                                ? "bg-green-100 text-green-800"
+                                : ""
+                            }
+                          >
+                            {exp.type}
+                          </Badge>
+                          {exp.status === "upcoming" && (
+                            <Badge
+                              variant="outline"
+                              className="bg-blue-100 text-blue-800 border-blue-300"
+                            >
+                              Upcoming
+                            </Badge>
+                          )}
+                        </div>
                       </div>
 
                       <div className="flex items-center gap-2 mb-4 text-gray-600">
@@ -89,16 +127,33 @@ const Experience = () => {
                         <span className="text-sm">{exp.period}</span>
                       </div>
 
+                      {exp.salary && (
+                        <div className="flex items-center gap-2 mb-4 text-green-600">
+                          <DollarSign size={16} />
+                          <span className="text-sm font-medium">
+                            {exp.salary}
+                          </span>
+                        </div>
+                      )}
+
                       <p className="text-gray-700 leading-relaxed">
                         {exp.description}
                       </p>
 
                       {/* Key Achievements */}
-                      {index === 0 && (
+                      {exp.status === "completed" && index === 1 && (
                         <div className="mt-4 p-3 bg-green-50 rounded-lg border border-green-200">
                           <p className="text-sm text-green-800 font-medium">
-                            🎯 Key Achievement: Enhanced website functionality
-                            by 30%
+                            🎯 Key Achievement: Improved UI/UX by 30%
+                          </p>
+                        </div>
+                      )}
+
+                      {exp.status === "upcoming" && (
+                        <div className="mt-4 p-3 bg-blue-50 rounded-lg border border-blue-200">
+                          <p className="text-sm text-blue-800 font-medium">
+                            🚀 Excited to contribute to live projects and
+                            optimize performance!
                           </p>
                         </div>
                       )}
@@ -112,7 +167,13 @@ const Experience = () => {
                     index % 2 === 0 ? "order-last" : "order-first"
                   }`}
                 >
-                  <div className="text-2xl font-bold text-portfolio-300">
+                  <div
+                    className={`text-2xl font-bold ${
+                      exp.status === "upcoming"
+                        ? "text-blue-300"
+                        : "text-portfolio-300"
+                    }`}
+                  >
                     0{index + 1}
                   </div>
                 </div>
@@ -132,25 +193,25 @@ const Experience = () => {
           <Card className="bg-gradient-to-r from-portfolio-500 to-blue-500 text-white">
             <CardContent className="p-8 text-center">
               <h3 className="text-xl font-semibold mb-4">
-                Growing Professional Journey
+                Professional Growth Journey
               </h3>
               <p className="text-sm opacity-90 max-w-3xl mx-auto">
                 From unpaid internships to paid positions, demonstrating
                 continuous growth and increasing value in software development
-                and web technologies.
+                and web technologies. Ready to take on new challenges in 2025!
               </p>
               <div className="grid grid-cols-3 gap-4 mt-6 max-w-md mx-auto">
                 <div className="text-center">
-                  <div className="text-lg font-bold">2+</div>
+                  <div className="text-lg font-bold">2</div>
                   <div className="text-xs opacity-80">Internships</div>
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-bold">30%</div>
-                  <div className="text-xs opacity-80">Performance Boost</div>
+                  <div className="text-xs opacity-80">UI/UX Improvement</div>
                 </div>
                 <div className="text-center">
                   <div className="text-lg font-bold">100%</div>
-                  <div className="text-xs opacity-80">Growth Rate</div>
+                  <div className="text-xs opacity-80">Dedication</div>
                 </div>
               </div>
             </CardContent>

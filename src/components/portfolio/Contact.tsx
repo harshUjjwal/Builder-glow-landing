@@ -5,7 +5,8 @@ import { Button } from "@/components/ui/button";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
-import { Mail, Phone, MapPin, Github, Linkedin, Send } from "lucide-react";
+import { Mail, Phone, MapPin, Github, Send } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import { portfolioData } from "@/lib/portfolio-data";
 import { useToast } from "@/hooks/use-toast";
 
@@ -156,13 +157,42 @@ const Contact = () => {
                   </Card>
                 </motion.div>
               ))}
+
+              {/* LinkedIn Card */}
+              <motion.div
+                initial={{ opacity: 0, y: 20 }}
+                whileInView={{ opacity: 1, y: 0 }}
+                transition={{ duration: 0.5, delay: 0.7 }}
+                viewport={{ once: true }}
+              >
+                <Card className="hover:shadow-md transition-shadow">
+                  <CardContent className="p-4">
+                    <a
+                      href={portfolioData.personal.linkedin}
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      className="flex items-center gap-4 group"
+                    >
+                      <div className="p-3 rounded-lg text-blue-600 bg-blue-100 group-hover:scale-110 transition-transform">
+                        <FaLinkedin size={20} />
+                      </div>
+                      <div>
+                        <p className="font-medium text-gray-900">LinkedIn</p>
+                        <p className="text-gray-600 text-sm">
+                          linkedin.com/in/harsh-ujjwal-94a26b281
+                        </p>
+                      </div>
+                    </a>
+                  </CardContent>
+                </Card>
+              </motion.div>
             </div>
 
             {/* Availability Status */}
             <motion.div
               initial={{ opacity: 0, y: 20 }}
               whileInView={{ opacity: 1, y: 0 }}
-              transition={{ duration: 0.5, delay: 0.7 }}
+              transition={{ duration: 0.5, delay: 0.8 }}
               viewport={{ once: true }}
               className="mt-8"
             >
@@ -181,6 +211,43 @@ const Contact = () => {
                   </div>
                 </CardContent>
               </Card>
+            </motion.div>
+
+            {/* Social Links */}
+            <motion.div
+              initial={{ opacity: 0, y: 20 }}
+              whileInView={{ opacity: 1, y: 0 }}
+              transition={{ duration: 0.5, delay: 0.9 }}
+              viewport={{ once: true }}
+              className="mt-8"
+            >
+              <h4 className="text-lg font-semibold text-gray-900 mb-4">
+                Connect on Social Media
+              </h4>
+              <div className="flex gap-4">
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() =>
+                    window.open(portfolioData.personal.linkedin, "_blank")
+                  }
+                  className="border-blue-300 text-blue-600 hover:bg-blue-50"
+                >
+                  <FaLinkedin size={20} className="mr-2" />
+                  LinkedIn
+                </Button>
+                <Button
+                  variant="outline"
+                  size="lg"
+                  onClick={() =>
+                    window.open(portfolioData.personal.github, "_blank")
+                  }
+                  className="border-gray-300 text-gray-600 hover:bg-gray-50"
+                >
+                  <Github size={20} className="mr-2" />
+                  GitHub
+                </Button>
+              </div>
             </motion.div>
           </motion.div>
 
