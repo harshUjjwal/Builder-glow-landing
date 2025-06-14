@@ -138,7 +138,7 @@ const Hero = () => {
             </motion.div>
           </motion.div>
 
-          {/* Right Column - Profile Image */}
+          {/* Right Column - Profile Image (Rectangular) */}
           <motion.div
             initial={{ opacity: 0, scale: 0.8 }}
             animate={{ opacity: 1, scale: 1 }}
@@ -146,16 +146,17 @@ const Hero = () => {
             className="flex justify-center lg:justify-end"
           >
             <div className="relative">
-              <div className="absolute -inset-4 bg-gradient-to-r from-portfolio-400 to-blue-400 rounded-full blur opacity-20 animate-glow" />
+              <div className="absolute -inset-4 bg-gradient-to-r from-portfolio-400 to-blue-400 rounded-xl blur opacity-20 animate-glow" />
               <div className="relative">
                 <img
                   src="/assets/profile/profile.jpg"
                   alt="Harsh Ujjwal"
-                  className="rounded-full shadow-lg w-48 h-48 object-cover border-4 border-white"
+                  className="rounded-xl shadow-xl w-80 h-96 object-cover border-4 border-white transform hover:scale-105 transition-transform duration-300"
                   onError={(e) => {
                     // Fallback to PhotoUpload component if image doesn't exist
-                    e.currentTarget.style.display = "none";
-                    const parent = e.currentTarget.parentElement;
+                    const target = e.currentTarget;
+                    target.style.display = "none";
+                    const parent = target.parentElement;
                     if (
                       parent &&
                       !parent.querySelector(".photo-upload-fallback")
@@ -166,6 +167,15 @@ const Hero = () => {
                     }
                   }}
                 />
+                {/* Professional overlay badge */}
+                <div className="absolute bottom-4 left-4 bg-white/90 backdrop-blur-sm rounded-lg px-3 py-2 shadow-lg">
+                  <p className="text-sm font-medium text-gray-800">
+                    Software Developer
+                  </p>
+                  <p className="text-xs text-gray-600">Full-Stack & IoT</p>
+                </div>
+
+                {/* Fallback PhotoUpload component */}
                 <div className="photo-upload-fallback hidden">
                   <PhotoUpload
                     onPhotoChange={setProfilePhoto}
@@ -177,22 +187,21 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Instructions for manual photo upload */}
+        {/* Profile Image Instructions */}
         <motion.div
           initial={{ opacity: 0, y: 20 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ delay: 1.0 }}
           className="mt-12 text-center"
         >
-          <div className="bg-blue-50 border border-blue-200 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-sm text-blue-800">
-              <strong>📁 Profile Photo Instructions:</strong> To display your
-              profile photo, manually upload a file named{" "}
-              <code className="bg-blue-100 px-1 rounded">profile.jpg</code> to
-              the
-              <code className="bg-blue-100 px-1 rounded">
+          <div className="bg-green-50 border border-green-200 rounded-lg p-4 max-w-2xl mx-auto">
+            <p className="text-sm text-green-800">
+              <strong>✅ Profile Photo Loaded!</strong> Professional image
+              displaying in rectangular format as requested. The image is stored
+              in the
+              <code className="bg-green-100 px-1 rounded mx-1">
                 /public/assets/profile/
-              </code>{" "}
+              </code>
               folder.
             </p>
           </div>
