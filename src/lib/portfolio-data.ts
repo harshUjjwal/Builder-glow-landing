@@ -74,7 +74,7 @@ export const portfolioData = {
       category: "Web Development",
       status: "live",
       links: {
-        live: "#", // Replace with actual demo link
+        live: "https://harshujjwal.github.io/real-estate-website/",
         github: null,
       },
     },
@@ -87,7 +87,8 @@ export const portfolioData = {
       status: "completed",
       links: {
         live: null,
-        github: "#", // Replace with actual GitHub link
+        github:
+          "https://github.com/harshUjjwal/Automatic-liquid-dispenser-with-notification-",
       },
     },
     {
@@ -99,7 +100,8 @@ export const portfolioData = {
       status: "completed",
       links: {
         live: null,
-        github: "#", // Replace with actual GitHub link
+        github:
+          "https://github.com/harshUjjwal/fog-density-based-safe-driving-system",
       },
     },
     {
