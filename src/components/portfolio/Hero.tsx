@@ -187,26 +187,6 @@ const Hero = () => {
           </motion.div>
         </div>
 
-        {/* Profile Image Instructions */}
-        <motion.div
-          initial={{ opacity: 0, y: 20 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ delay: 1.0 }}
-          className="mt-12 text-center"
-        >
-          <div className="bg-green-50 border border-green-200 rounded-lg p-4 max-w-2xl mx-auto">
-            <p className="text-sm text-green-800">
-              <strong>✅ Profile Photo Loaded!</strong> Professional image
-              displaying in rectangular format as requested. The image is stored
-              in the
-              <code className="bg-green-100 px-1 rounded mx-1">
-                /public/assets/profile/
-              </code>
-              folder.
-            </p>
-          </div>
-        </motion.div>
-
         {/* Scroll Indicator */}
         <motion.div
           initial={{ opacity: 0 }}
