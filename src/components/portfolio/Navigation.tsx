@@ -1,7 +1,9 @@
 import { useState, useEffect } from "react";
 import { Button } from "@/components/ui/button";
-import { Menu, X } from "lucide-react";
+import { Menu, X, Github } from "lucide-react";
+import { FaLinkedin } from "react-icons/fa";
 import { motion, AnimatePresence } from "framer-motion";
+import { portfolioData } from "@/lib/portfolio-data";
 
 const Navigation = () => {
   const [isOpen, setIsOpen] = useState(false);
@@ -56,21 +58,47 @@ const Navigation = () => {
           </motion.div>
 
           {/* Desktop Navigation */}
-          <div className="hidden md:flex space-x-8">
-            {navItems.map((item) => (
+          <div className="hidden md:flex items-center space-x-6">
+            <div className="flex space-x-6">
+              {navItems.map((item) => (
+                <Button
+                  key={item.id}
+                  variant="ghost"
+                  onClick={() => scrollToSection(item.id)}
+                  className={`transition-colors ${
+                    activeSection === item.id
+                      ? "text-portfolio-600 bg-portfolio-50"
+                      : "text-gray-600 hover:text-portfolio-600"
+                  }`}
+                >
+                  {item.label}
+                </Button>
+              ))}
+            </div>
+
+            {/* Social Links */}
+            <div className="flex items-center space-x-2 border-l border-gray-200 pl-6">
               <Button
-                key={item.id}
                 variant="ghost"
-                onClick={() => scrollToSection(item.id)}
-                className={`transition-colors ${
-                  activeSection === item.id
-                    ? "text-portfolio-600 bg-portfolio-50"
-                    : "text-gray-600 hover:text-portfolio-600"
-                }`}
+                size="icon"
+                onClick={() =>
+                  window.open(portfolioData.personal.linkedin, "_blank")
+                }
+                className="text-gray-600 hover:text-blue-600"
               >
-                {item.label}
+                <FaLinkedin size={18} />
               </Button>
-            ))}
+              <Button
+                variant="ghost"
+                size="icon"
+                onClick={() =>
+                  window.open(portfolioData.personal.github, "_blank")
+                }
+                className="text-gray-600 hover:text-gray-800"
+              >
+                <Github size={18} />
+              </Button>
+            </div>
           </div>
 
           {/* Mobile Menu Button */}
